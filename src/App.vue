@@ -2,8 +2,10 @@
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
 import { useUser } from "@/composables/useUser";
+import { useCart } from "./composables/useCart";
 
 const { loggedIn, user, logout } = useUser();
+const { totalProducts } = useCart();
 </script>
 
 <template>
@@ -22,9 +24,10 @@ const { loggedIn, user, logout } = useUser();
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/products">Products</RouterLink>
+        <RouterLink to="/cart">My Cart({{totalProducts}})</RouterLink>
         <RouterLink to="/login" v-if="!loggedIn">Login</RouterLink>
-        <RouterLink to="/login" v-if="loggedIn"
-        @click="logout"
+        <RouterLink to="/login" v-if="loggedIn" @click="logout"
           >Logout ({{ user.username }})</RouterLink
         >
       </nav>
